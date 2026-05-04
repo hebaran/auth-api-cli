@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using AuthCli.Models;
 
 namespace AuthCli.Services;
@@ -6,9 +7,14 @@ public class AuthService
 {
     public static async Task<UserModel?> GetUser(string usernameOrEmailInput)
     {
-        UserModel? userLogin = await context.Users.FirstOrDefault(dbUser => dbUser.Name == usernameOrEmailInput || dbUser.Email == usernameOrEmailInput);
+        using var client = new HttpClient();
+        string usersApi = "https://minha-api.com/users/search";
 
-        return userLogin;
+        var search = new { login = usernameOrEmailInput };
+        var response = await client.PostAsJsonAsync(usersApi, search);
+        var userFound = await response.Content.ReadFromJsonAsync<UserModel?>();
+
+        return userFound;
     }
 
     public static bool GetPassword(UserModel user, string passwordInput)
