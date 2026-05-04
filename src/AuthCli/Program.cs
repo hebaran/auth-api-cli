@@ -1,5 +1,4 @@
-﻿using AuthCli.Models;
-using AuthCli.Services;
+﻿using AuthCli.Services;
 
 static string ReadWrite(string message)
 {
@@ -14,12 +13,9 @@ Console.Clear();
 string usernameOrEmailInput = ReadWrite("Nome de usuário ou E-mail: ");
 string passwordInput = ReadWrite("Senha: ");
 
-UserModel? user = await AuthService.GetUser(usernameOrEmailInput);
+var userAuthentication = await AuthService.AuthenticateUser(usernameOrEmailInput, passwordInput);
 
-if (user is not null)
+if (userAuthentication.IsSuccessStatusCode)
 {
-    if (AuthService.GetPassword(user, passwordInput))
-    {
-        //
-    }
+    //
 }

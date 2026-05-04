@@ -1,26 +1,20 @@
 using System.Net.Http.Json;
-using AuthCli.Models;
 
 namespace AuthCli.Services;
 
+public record DataAcess(string Identifier, string Key);
+
 public class AuthService
 {
-    public static async Task<UserModel?> GetUser(string usernameOrEmailInput)
+    public static async Task<HttpResponseMessage> AuthenticateUser(string usernameOrEmailInput, string passwordInput)
     {
         using var client = new HttpClient();
+
+        var payload = new DataAcess(usernameOrEmailInput, passwordInput);
         string usersApi = "https://minha-api.com/users/search";
 
-        var search = new { login = usernameOrEmailInput };
-        var response = await client.PostAsJsonAsync(usersApi, search);
-        var userFound = await response.Content.ReadFromJsonAsync<UserModel?>();
+        var response = await client.PostAsJsonAsync(usersApi, payload);
 
-        return userFound;
-    }
-
-    public static bool GetPassword(UserModel user, string passwordInput)
-    {
-        string userPassword = user.Password;
-
-        return userPassword == passwordInput;
+        return response;
     }
 }
