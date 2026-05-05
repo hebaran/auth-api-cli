@@ -1,3 +1,4 @@
+using AuthApi.Filters;
 using AuthApi.Models;
 using AuthApi.Services;
 
@@ -15,7 +16,8 @@ public static class UserRoute
             await userService.AddUserToDatabase(user);
 
             return Results.Created($"/users/{user.Id}", user);
-        });
+        })
+        .AddEndpointFilter<ValidationFilter<UserRequest>>();
 
         usersRoute.MapGet("/", async (UserService userService) =>
         {
