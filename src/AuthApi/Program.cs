@@ -1,3 +1,4 @@
+using FluentValidation;
 using AuthApi.Data;
 using AuthApi.Routes;
 using AuthApi.Services;
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<UserDbContext>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
