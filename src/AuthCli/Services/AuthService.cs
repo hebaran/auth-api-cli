@@ -1,8 +1,7 @@
 using System.Net.Http.Json;
+using AuthCli.Models;
 
 namespace AuthCli.Services;
-
-public record DataAcess(string Identifier, string Key);
 
 public class AuthService
 {
@@ -10,7 +9,7 @@ public class AuthService
     {
         using var client = new HttpClient();
 
-        var payload = new DataAcess(usernameOrEmailInput, passwordInput);
+        var payload = new DataAcessModel(usernameOrEmailInput, passwordInput);
         string usersApi = "https://minha-api.com/users/search";
 
         var response = await client.PostAsJsonAsync(usersApi, payload);
