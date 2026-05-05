@@ -1,4 +1,5 @@
 using AuthApi.Data;
+using AuthApi.Routes;
 using AuthApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,5 +17,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UserRoutes();
 app.UseHttpsRedirection();
 app.Run();
