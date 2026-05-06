@@ -1,15 +1,4 @@
-﻿using AuthCli.Services;
-using AuthCli.UI;
+﻿using AuthCli.Core;
 
-var menu = new MainMenu();
-menu.Show();
-
-string usernameOrEmailInput = Prompt.Input("Nome de usuário ou E-mail: ");
-string passwordInput = Prompt.Input("Senha: ");
-
-var userAuthentication = await AuthService.AuthenticateUser(usernameOrEmailInput, passwordInput);
-
-if (userAuthentication.IsSuccessStatusCode)
-{
-    //
-}
+var app = new App();
+app.Run();
