@@ -1,33 +1,28 @@
 using System.Net.Http.Json;
 using AuthCli.Models;
-using AuthCli.UI;
 
 namespace AuthCli.Services;
 
-public class AuthService // REVISITAR ISSO AQUI
+public class AuthService
 {
-    public static async Task RequestUserData()
+    public static async Task TryLogin(DataAcessModel loginRequest)
     {
-        string usernameOrEmailInput = Prompt.Input("Nome de usuário ou E-mail: ");
-        string passwordInput = Prompt.Input("Senha: ");
+        var userAuthentication = await AuthenticateUser(loginRequest);
 
-        var userAuthentication = await AuthenticateUser(usernameOrEmailInput, passwordInput);
-
-        if (userAuthentication.IsSuccessStatusCode)
+        if (userAuthentication)
         {
             //
         }
     }
 
-    public static async Task<HttpResponseMessage> AuthenticateUser(string usernameOrEmailInput, string passwordInput)
+    public static async Task<bool> AuthenticateUser(DataAcessModel payload)
     {
         using var client = new HttpClient();
 
-        var payload = new DataAcessModel(usernameOrEmailInput, passwordInput);
         string usersApi = "https://minha-api.com/users/search";
 
         var response = await client.PostAsJsonAsync(usersApi, payload);
 
-        return response;
+        return response.IsSuccessStatusCode;
     }
 }
