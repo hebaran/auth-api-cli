@@ -8,6 +8,14 @@ public class App()
 
     public void Run()
     {
-        Menu.Show();
+        while (Menu.IsRunning)
+        {
+            Menu.Show();
+
+            if (Menu.LastUserInteraction() is int keyPressed)
+            {
+                Menu.CallToAction(keyPressed);
+            }
+        }
     }
 }
