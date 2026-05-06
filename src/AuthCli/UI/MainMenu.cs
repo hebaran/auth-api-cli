@@ -1,3 +1,5 @@
+using AuthCli.Services;
+
 namespace AuthCli.UI;
 
 public class MainMenu
@@ -62,7 +64,8 @@ public class MainMenu
         switch (option)
         {
             case 0:
-                Console.WriteLine("Entrando.");
+                // var userData = AuthInput.RequestUserData();
+                // AuthService.TryLogin(userData);
                 Console.ReadKey();
                 break;
             case 1:
