@@ -13,66 +13,67 @@ public class MainMenu
         LastKeyPressed = default;
     }
 
-    public int Show()
+    public void Show()
     {
-        while (IsRunning)
+        Console.Clear();
+
+        var menuOptions = Option.MenuOptions;
+
+        for (int index = 0; index < menuOptions.Length; index++)
         {
-            Console.Clear();
-
-            var menuOptions = Option.MenuOptions;
-
-            for (int index = 0; index < menuOptions.Length; index++)
+            Console.Write("\x1b[1m");
+            if (index == Option.Index)
             {
-                Console.Write("\x1b[1m");
-                if (index == Option.Index)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine($"> [{menuOptions[index]}]");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    Console.WriteLine($"  [{menuOptions[index]}]");
-                }
-                Console.Write("\x1b[0m");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"> [{menuOptions[index]}]");
+                Console.ResetColor();
             }
-
-            Console.WriteLine($"Index Atual: {Option.Index}\nTecla Pressionada: {LastKeyPressed.Key}");
-            LastKeyPressed = Console.ReadKey(true);
-
-            switch (LastKeyPressed.Key)
+            else
             {
-                case ConsoleKey.Enter:
-                    switch (Option.Index)
-                    {
-                        case 0:
-                            break;
-                        case 1:
-                            break;
-                        case 2:
-                            IsRunning = false;
-                            break;
-                    }
-
-                    break;
-                case ConsoleKey.UpArrow:
-                    if (Option.Index > 0)
-                    {
-                        Option.ReduceIndex();
-                    }
-
-                    break;
-                case ConsoleKey.DownArrow:
-                    if (Option.Index < 2)
-                    {
-                        Option.IncreaseIndex();
-                    }
-                    
-                    break;
+                Console.WriteLine($"  [{menuOptions[index]}]");
             }
+            Console.Write("\x1b[0m");
         }
 
-        return Option.Index;
+        Console.WriteLine($"Index Atual: {Option.Index}\nTecla Pressionada: {LastKeyPressed.Key}"); // REMOVER DEPOIS (DEBUG LOG)
+    }
+
+    public int? LastUserInteraction()
+    {
+        LastKeyPressed = Console.ReadKey(true);
+
+        switch (LastKeyPressed.Key)
+        {
+            case ConsoleKey.Enter:
+                return Option.Index;
+            case ConsoleKey.UpArrow:
+                Option.ReduceIndex();
+                break;
+            case ConsoleKey.DownArrow:
+                Option.IncreaseIndex();
+                break;
+        }
+
+        return null;
+    }
+
+    public void CallToAction(int option)
+    {
+        switch (option)
+        {
+            case 0:
+                Console.WriteLine("Entrando.");
+                Console.ReadKey();
+                break;
+            case 1:
+                Console.WriteLine("Criando uma nova conta.");
+                Console.ReadKey();
+                break;
+            case 2:
+                Console.WriteLine("Saindo.");
+                IsRunning = false;
+                break;
+        }
     }
 
     public class SelectOption
@@ -88,12 +89,18 @@ public class MainMenu
 
         public void IncreaseIndex()
         {
-            Index++;
+            if (Index < MenuOptions.Length -1)
+            {
+                Index++;
+            }
         }
 
         public void ReduceIndex()
         {
-            Index--;
+            if (Index > 0)
+            {
+                Index--;
+            }
         }
     }
 }
