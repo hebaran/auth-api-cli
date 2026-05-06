@@ -21,12 +21,12 @@ public class MainMenu
         {
             Console.Clear();
 
-            var menuOptions = Option.GetOptions();
+            var menuOptions = Option.MenuOptions;
 
             for (int index = 0; index < menuOptions.Length; index++)
             {
                 Console.Write("\x1b[1m");
-                if (index == Option.GetIndex())
+                if (index == Option.Index)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine($"> [{menuOptions[index]}]");
@@ -39,13 +39,13 @@ public class MainMenu
                 Console.Write("\x1b[0m");
             }
 
-            Console.WriteLine($"Index Atual: {Option.GetIndex()}\nTecla Pressionada: {LastKeyPressed.Key}");
+            Console.WriteLine($"Index Atual: {Option.Index}\nTecla Pressionada: {LastKeyPressed.Key}");
             LastKeyPressed = Console.ReadKey(true);
 
             switch (LastKeyPressed.Key)
             {
                 case ConsoleKey.Enter:
-                    switch (Option.GetIndex())
+                    switch (Option.Index)
                     {
                         case 0:
                             break;
@@ -58,14 +58,14 @@ public class MainMenu
 
                     break;
                 case ConsoleKey.UpArrow:
-                    if (Option.GetIndex() > 0)
+                    if (Option.Index > 0)
                     {
                         Option.ReduceIndex();
                     }
 
                     break;
                 case ConsoleKey.DownArrow:
-                    if (Option.GetIndex() < 2)
+                    if (Option.Index < 2)
                     {
                         Option.IncreaseIndex();
                     }
@@ -74,38 +74,28 @@ public class MainMenu
             }
         }
 
-        return Option.GetIndex();
+        return Option.Index;
     }
 
     public class SelectOption
     {
-        private readonly string[] _menuOptions;
-        private int _index;
+        public string[] MenuOptions { get; private set; }
+        public int Index { get; private set; }
 
         public SelectOption()
         {
-            _menuOptions = ["Entrar", "Criar uma conta", "Sair"];
-            _index = 0;
-        }
-
-        public string[] GetOptions()
-        {
-            return _menuOptions;
-        }
-
-        public int GetIndex()
-        {
-            return _index;
+            MenuOptions = ["Entrar", "Criar uma conta", "Sair"];
+            Index = 0;
         }
 
         public void IncreaseIndex()
         {
-            _index++;
+            Index++;
         }
 
         public void ReduceIndex()
         {
-            _index--;
+            Index--;
         }
     }
 }
