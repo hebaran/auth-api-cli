@@ -1,17 +1,11 @@
 ﻿using AuthCli.Services;
+using AuthCli.UI;
 
-static string ReadWrite(string message)
-{
-    Console.Write(message);
-    string messageResponse = Console.ReadLine() ?? "";
-    
-    return messageResponse;
-}
+var menu = new MainMenu();
+menu.Show();
 
-Console.Clear();
-
-string usernameOrEmailInput = ReadWrite("Nome de usuário ou E-mail: ");
-string passwordInput = ReadWrite("Senha: ");
+string usernameOrEmailInput = Prompt.Input("Nome de usuário ou E-mail: ");
+string passwordInput = Prompt.Input("Senha: ");
 
 var userAuthentication = await AuthService.AuthenticateUser(usernameOrEmailInput, passwordInput);
 
