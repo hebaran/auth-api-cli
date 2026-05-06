@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace AuthCli.UI;
 
 public class MainMenu
