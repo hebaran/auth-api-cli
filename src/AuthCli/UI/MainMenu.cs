@@ -59,14 +59,14 @@ public class MainMenu
         return null;
     }
 
-    public void CallToAction(int option)
+    public async Task CallToAction(int option)
     {
         switch (option)
         {
             case 0:
-                // var userData = AuthInput.RequestUserData();
-                // AuthService.TryLogin(userData);
-                Console.ReadKey();
+                var userData = AuthInput.RequestLoginData();
+                await AuthService.TryLogin(userData);
+                //Console.ReadLine();
                 break;
             case 1:
                 Console.WriteLine("Criando uma nova conta.");
