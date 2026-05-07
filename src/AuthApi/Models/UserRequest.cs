@@ -1,3 +1,3 @@
 namespace AuthApi.Models;
 
-public record UserRequest(string Email, string Username, string Password);
+public record CreateUserRequest(string Email, string Username, string Password);

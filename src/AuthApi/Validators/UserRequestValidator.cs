@@ -3,7 +3,7 @@ using AuthApi.Models;
 
 namespace AuthApi.Validators;
 
-public class UserRequestValidator : AbstractValidator<UserRequest>
+public class UserRequestValidator : AbstractValidator<CreateUserRequest>
 {
     public UserRequestValidator()
     {
