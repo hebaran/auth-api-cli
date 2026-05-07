@@ -19,7 +19,7 @@ public class AuthService
     {
         using var client = new HttpClient();
 
-        string usersApi = "https://minha-api.com/users/search";
+        string usersApi = "https://symmetrical-space-trout-vgw6q64xppq3w4rx-5106.app.github.dev/auth/login";
 
         var response = await client.PostAsJsonAsync(usersApi, payload);
 
