@@ -8,6 +8,7 @@ public class AuthService
     public static async Task TryLogin(DataAcessModel loginRequest)
     {
         var userAuthentication = await AuthenticateUser(loginRequest);
+        Console.WriteLine($"\n{loginRequest}"); // DEBUG LOG
 
         if (userAuthentication)
         {
