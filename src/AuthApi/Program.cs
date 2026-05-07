@@ -20,5 +20,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UserRoutes();
+app.AuthRoutes();
 app.UseHttpsRedirection();
 app.Run();
