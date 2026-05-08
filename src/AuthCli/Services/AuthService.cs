@@ -25,7 +25,7 @@ public class AuthService
     {
         using var client = new HttpClient();
 
-        string usersApi = "https://symmetrical-space-trout-vgw6q64xppq3w4rx-5106.app.github.dev/auth/login";
+        string usersApi = "http://localhost:5106/auth/login";
 
         var response = await client.PostAsJsonAsync(usersApi, payload);
         
