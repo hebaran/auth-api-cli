@@ -5,7 +5,7 @@ namespace AuthCli.Services;
 
 public class AuthService
 {
-    public static async Task TryLogin(DataAcessModel loginRequest)
+    public static async Task TryLogin(LoginDataModel loginRequest)
     {
         var userAuthentication = await AuthenticateUser(loginRequest);
         Console.WriteLine($"\n{loginRequest}"); // DEBUG LOG
@@ -21,7 +21,7 @@ public class AuthService
         }
     }
 
-    public static async Task<bool> AuthenticateUser(DataAcessModel payload)
+    public static async Task<bool> AuthenticateUser(LoginDataModel payload)
     {
         using var client = new HttpClient();
 
