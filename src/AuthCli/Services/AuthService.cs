@@ -33,7 +33,18 @@ public class AuthService
         return response.IsSuccessStatusCode;
     }
 
-        
+    public static async Task<bool> CreateAccount(SignupModel signupRequest)
+    {
+        return true;
+    }
+
+    public static async Task<bool> QueryUsername(string username)
+    {
+        using var client = new HttpClient();
+        client.BaseAddress = new Uri(ApiSettings.BaseUrl);
+
+        var response = await client.PostAsJsonAsync("/users", username);
+
         return response.IsSuccessStatusCode;
     }
 }
