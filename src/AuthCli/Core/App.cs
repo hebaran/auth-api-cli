@@ -6,7 +6,7 @@ public class App()
 {
     public MainMenu Menu { get; private set; } = new();
 
-    public void Run()
+    public async Task Run()
     {
         while (Menu.IsRunning)
         {
@@ -14,7 +14,7 @@ public class App()
 
             if (Menu.LastUserInteraction() is int keyPressed)
             {
-                Menu.CallToAction(keyPressed);
+                await Menu.CallToAction(keyPressed);
             }
         }
     }
