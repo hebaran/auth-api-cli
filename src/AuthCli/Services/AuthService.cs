@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using AuthCli.Models;
+using AuthCli.Settings;
 
 namespace AuthCli.Services;
 
@@ -24,10 +25,7 @@ public class AuthService
     public static async Task<bool> AuthenticateUser(LoginDataModel payload)
     {
         using var client = new HttpClient();
-
-        string usersApi = "http://localhost:5106/auth/login";
-
-        var response = await client.PostAsJsonAsync(usersApi, payload);
+        client.BaseAddress = new Uri(ApiSettings.BaseUrl);
         
         return response.IsSuccessStatusCode;
     }
