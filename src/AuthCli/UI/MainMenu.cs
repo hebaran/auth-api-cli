@@ -64,9 +64,8 @@ public class MainMenu
         switch (option)
         {
             case 0:
-                var userData = AuthInput.RequestLoginData();
-                await AuthService.TryLogin(userData);
-                //Console.ReadLine();
+                var loginData = AuthInput.RequestLoginData();
+                await AuthService.TryLogin(loginData);
                 break;
             case 1:
                 Console.WriteLine("Criando uma nova conta.");
