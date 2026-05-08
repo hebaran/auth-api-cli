@@ -68,7 +68,8 @@ public class MainMenu
                 await AuthService.TryLogin(loginData);
                 break;
             case 1:
-                Console.WriteLine("Criando uma nova conta.");
+                var signupData = AuthInput.RequestSignupData();
+                //await AuthService.CreateAccount(signupData);
                 Console.ReadKey();
                 break;
             case 2:
