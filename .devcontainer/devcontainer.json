@@ -1,0 +1,13 @@
+{
+    "image":"mcr.microsoft.com/devcontainers/dotnet:10.0",
+
+    "forwardPorts": [5106],
+
+    "portsAttributes": {
+        "5106": {
+        "label": "Auth API",
+        "onAutoForward": "notify",
+        "visibility": "public"
+        }
+    }
+}

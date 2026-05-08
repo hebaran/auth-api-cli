@@ -10,14 +10,14 @@ public static class UserRoute
     {
         var usersRoute = app.MapGroup("/users");
 
-        usersRoute.MapPost("/", async (UserRequest request, UserService userService) =>
+        usersRoute.MapPost("/", async (CreateUserRequest request, UserService userService) =>
         {
             var user = userService.CreateUser(request);
             await userService.AddUserToDatabase(user);
 
             return Results.Created($"/users/{user.Id}", user);
         })
-        .AddEndpointFilter<ValidationFilter<UserRequest>>();
+        .AddEndpointFilter<ValidationFilter<CreateUserRequest>>();
 
         usersRoute.MapGet("/", async (UserService userService) =>
         {

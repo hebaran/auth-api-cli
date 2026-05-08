@@ -8,10 +8,16 @@ public class AuthService
     public static async Task TryLogin(DataAcessModel loginRequest)
     {
         var userAuthentication = await AuthenticateUser(loginRequest);
+        Console.WriteLine($"\n{loginRequest}"); // DEBUG LOG
 
         if (userAuthentication)
         {
-            //
+            Console.WriteLine("\nLogado com sucesso.");
+            //MoveToUserPanel()
+        }
+        else
+        {
+            Console.WriteLine("\nNome de usuário/e-mail ou senha incorretos.");
         }
     }
 
@@ -19,10 +25,10 @@ public class AuthService
     {
         using var client = new HttpClient();
 
-        string usersApi = "https://minha-api.com/users/search";
+        string usersApi = "http://localhost:5106/auth/login";
 
         var response = await client.PostAsJsonAsync(usersApi, payload);
-
+        
         return response.IsSuccessStatusCode;
     }
 }

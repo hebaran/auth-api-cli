@@ -6,7 +6,7 @@ namespace AuthApi.Services;
 
 public class UserService(UserDbContext context)
 {
-    public UserModel CreateUser(UserRequest request)
+    public UserModel CreateUser(CreateUserRequest request)
     {
         string email = request.Email;
         string username = request.Username;
@@ -26,6 +26,15 @@ public class UserService(UserDbContext context)
     public async Task<UserModel?> GetUser(Guid id)
     {
         var user = await context.Users.FindAsync(id);
+
+        return user;
+    }
+
+    public async Task<UserModel?> GetUserByRequest(LoginRequest request)
+    {
+        (string identifier, string password) = request;
+
+        var user = await context.Users.FirstOrDefaultAsync(x => (x.Username == identifier || x.Email == identifier) && x.Password == password);
 
         return user;
     }
