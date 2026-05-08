@@ -4,15 +4,16 @@ namespace AuthCli.UI;
 
 public static class AuthInput
 {
-    public static DataAcessModel RequestLoginData()
+    public static LoginDataModel RequestLoginData()
     {
         Console.Clear();
 
-        string usernameOrEmailInput = Prompt.InputText("Nome de usuário ou E-mail: ");
-        string passwordInput = Prompt.InputPassword("Senha: ");
+        string usernameOrEmail = Prompt.InputText("Nome de usuário ou E-mail: ");
+        string password = Prompt.InputPassword("Senha: ");
 
-        var loginRequest = new DataAcessModel(usernameOrEmailInput, passwordInput);
+        var loginRequest = new LoginDataModel(usernameOrEmail, password);
 
         return loginRequest;
     }
+
 }
