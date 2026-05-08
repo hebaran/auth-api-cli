@@ -20,6 +20,7 @@ public class AuthService
         {
             Console.WriteLine("\nNome de usuário/e-mail ou senha incorretos.");
         }
+        Console.ReadKey(); // REMOVER ISSO AQUI
     }
 
     public static async Task<bool> AuthenticateUser(LoginDataModel payload)
