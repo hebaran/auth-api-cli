@@ -26,6 +26,12 @@ public class AuthService
     {
         using var client = new HttpClient();
         client.BaseAddress = new Uri(ApiSettings.BaseUrl);
+
+        var response = await client.PostAsJsonAsync("/auth/login", payload);
+        
+        return response.IsSuccessStatusCode;
+    }
+
         
         return response.IsSuccessStatusCode;
     }
